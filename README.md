@@ -1,7 +1,7 @@
 # Ubuntu LUKS USB Auto-Unlock with Failover
 
 ## Overview
-This configuration enables an Ubuntu 24.04 Server (Encrypted Root via LUKS) to:
+This configuration enables an Ubuntu 24.04 Server/Desktop (Encrypted Root via LUKS) to:
 1.  **Auto-Unlock**: Attempt to unlock the root partition automatically using a keyfile on a specific USB drive during boot.
 2.  **Failover Gracefully**: If the USB drive is missing or fails to mount within 30 seconds, immediately drop to the standard password prompt.
 
@@ -69,7 +69,7 @@ You must edit the system configuration to use the new scripts.
     ```bash
     sudo nano /etc/crypttab
     ```
-3.  Update the line for your root device to match this format exactly:
+3.  Update the line for your root device to match this format exactly. The actual values should be what you put on your system in the steps above for root partition UUID, label, key file path:
     
     ```text
     dm_crypt-0 UUID=<YOUR-UUID> /dev/disk/by-label/test:/kiwi_key.bin:30 luks,keyscript=/lib/cryptsetup/scripts/passdev-failover,noauto,initramfs
